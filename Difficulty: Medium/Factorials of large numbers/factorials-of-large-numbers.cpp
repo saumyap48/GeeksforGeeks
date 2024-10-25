@@ -8,31 +8,27 @@ using namespace std;
 
 class Solution {
 public:
-  vector<int> factorial(int N){
-        // code here
-        vector<int> ans;
-        ans.push_back(1);
-        
-        
-        for(int i=2;i<=N;i++){
-            int carry=0;
-            
-            for(int j=0;j<ans.size();j++){
-                int t=ans[j]*i + carry;
-                ans[j]=t%10;
-                carry=t/10;
-                
+    vector<int> factorial(int N){
+        vector<int>ans(1,1);
+        while(N>1)
+        {
+            int carry =0, res, size=ans.size();
+            for(int i=0; i<size; i++)
+            {
+                res=ans[i]*N+carry;
+                ans[i]=res%10;
+                carry=res/10;
             }
-            while(carry){
-                ans.push_back(carry%10);
-                carry/=10;
-            }    
+            while(carry)
+            {
+            ans.push_back(carry%10);
+            carry/=10;
+            }
+            N--;
         }
-        
-        
         reverse(ans.begin(),ans.end());
         return ans;
-  }
+    }
 };
 
 //{ Driver Code Starts.
@@ -49,7 +45,9 @@ int main() {
             cout<< result[i];
         }
         cout << endl;
-    }
+    
+cout << "~" << "\n";
+}
     return 0;
 }
 // } Driver Code Ends
