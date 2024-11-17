@@ -5,24 +5,21 @@ using namespace std;
 
 // } Driver Code Ends
 
-class Solution{
-    public:
-void r(int i,vector<int>&arr,int n){
-        n=arr.size();
-        if(i>=n/2){
-            return;
+class Solution {
+public:
+    void reArray(vector<int>&arr, int start, int end) {
+    if (start >= end)
+        return;
+    swap(arr[start], arr[end]);
+
+    reArray(arr, start + 1, end - 1);
+}
+
+    void reverseArray(vector<int>& arr) {
+         reArray(arr, 0, arr.size()- 1);
         }
-        else{
-            swap(arr[i],arr[n-i-1]);
-            r(i+1,arr,n);
-        }
-    }
-    void reverseArray(vector<int> &arr) {
-        // code here
-        int n=arr.size();
-        r(0,arr,n);
-    }
 };
+
 
 //{ Driver Code Starts.
 int main() {
@@ -45,6 +42,7 @@ int main() {
             cout << arr[i] << " ";
         }
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
