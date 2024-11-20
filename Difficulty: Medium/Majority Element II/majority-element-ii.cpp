@@ -15,9 +15,10 @@ public:
         sort(arr.begin(), arr.end()); 
         
         for (int i = 0; i < n; i++) {
-            if (i < n - 1 && arr[i] == arr[i + 1]) { 
+            if (i < n - 1 && arr[i] == arr[i + 1]) {
                 count++;
-            } else {
+            } 
+            if (i == n - 1 || arr[i] != arr[i + 1]) {
                 if (count > n / 3) {
                     temp.push_back(arr[i]); 
                 }
@@ -25,9 +26,13 @@ public:
             }
         }
         
-        return temp; 
+        return temp;
     }
 };
+
+
+
+
 
 
 
