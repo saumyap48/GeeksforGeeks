@@ -40,22 +40,14 @@ struct Node
 */
 class Solution {
   public:
-    
-    bool check(vector<Node*>&visited,Node* curr){
-        for(int i=0; i<visited.size(); i++){
-            if(visited[i]==curr)
-            return 1;
-        }
-        return 0;
-    }
    
    bool detectLoop(Node* head) {
         Node* curr=head;
-        vector<Node*>visited;
+        unordered_map<Node*,bool>visited;
         while(curr){
-            if(check(visited,curr))
+            if(visited[curr]==1)
             return 1;
-            visited.push_back(curr);
+         visited[curr]=1;
             curr=curr->next;
         }
         return 0;
