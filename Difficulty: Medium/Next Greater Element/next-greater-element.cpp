@@ -10,20 +10,19 @@ class Solution {
     vector<int> nextLargerElement(vector<int>& arr) {
         // code here
         int n=arr.size();
-       vector<int> ans(n, -1);  
-       stack<int> s;  
-
+        vector<int> ans(n, -1); // Initialize result with -1
         for (int i = 0; i < n; i++) {
-      while (!s.empty() && arr[s.top()] < arr[i]) {
-        ans[s.top()] = arr[i];
-        s.pop();
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] > arr[i]) {
+                    ans[i] = arr[j];
+                    break;
+                }
+            }
+        }
+        return ans;
     }
-    s.push(i);  
-}
-
-return ans;
-}
 };
+
     
 
 //{ Driver Code Starts.
