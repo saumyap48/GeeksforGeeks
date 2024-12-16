@@ -6,22 +6,24 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    void segregateElements(vector<int>& arr) {
-        int n=arr.size();
-        vector<int>temp(n);
-        int index=0;
-        for(int i=0; i<n; i++){
-            if(arr[i]>=0){
-            temp[index++]=arr[i];
-            }
+  void segregateElements(vector<int>& arr) {
+     vector<int> positive, negative;
+    
+    // Traverse the array and segregate positive and negative numbers
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] >= 0) {
+            positive.push_back(arr[i]); // Store positive numbers
+        } else {
+            negative.push_back(arr[i]); // Store negative numbers
         }
-        for(int i=0; i<n; i++){
-            if(arr[i]<0)
-            temp[index++]=arr[i];
-        }
-        for(int i=0; i<n; i++){
-            arr[i]=temp[i];
-        }
+    }
+    
+    // Now we combine the positive and negative numbers
+    positive.insert(positive.end(), negative.begin(), negative.end());
+    
+    // Copy back to the original array
+    arr = positive;
+
     }
 };
 
@@ -46,7 +48,7 @@ int main() {
 
         for (int x : nums)
             cout << x << " ";
-        cout << endl;
+        cout << "\n~\n";
     }
 }
 // } Driver Code Ends
