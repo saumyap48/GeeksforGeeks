@@ -10,17 +10,30 @@ using namespace std;
 class Solution{
 public:
     vector<int> leftSmaller(int n, int a[]){
-        // code here
-        vector<int>ans(n,-1);
-        stack<int>s;
-        for(int i=n-1; i>=0; i--){
-            while(!s.empty() && a[s.top()]>a[i] ){
-            ans[s.top()]=a[i];
-            s.pop();
-            }
-            s.push(i);
-        }
-        return ans;
+           vector<int>answer;
+           stack<int>s;
+           for(int i=0; i<n; i++){
+               if(s.size()==0){
+                   answer.push_back(-1);
+               }
+               else if(s.size()>0 && s.top()<a[i]){
+                   answer.push_back(s.top());
+               }
+               else if(s.size()>0 && s.top()>=a[i]){
+                   while(s.size()>0 && s.top()>=a[i]){
+                       s.pop();
+                   }
+                   if(s.size()==0){
+                       answer.push_back(-1);
+                   }
+                   else{
+                       answer.push_back(s.top());
+                   }
+               }
+               s.push(a[i]);
+           }
+           return answer;
+        
     }
 };
 
