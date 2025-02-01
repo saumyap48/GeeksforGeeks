@@ -7,14 +7,23 @@ using namespace std;
 
 // } Driver Code Ends
 // User function template for C++
-class Solution{
-    public:
 
- int kthSmallest(vector<int> &arr, int k) {
-        // code here
-        sort(arr.begin(), arr.end());
-        return arr[k-1];
-}
+class Solution {
+  public:
+    // arr : given array
+    // k : find kth smallest element and return using this function
+    int kthSmallest(vector<int> &arr, int k) {
+        int n=arr.size();
+    priority_queue<int>smallestelement;
+    for(int i=0; i<n; i++){
+        smallestelement.push(arr[i]);
+        if(smallestelement.size()>k){
+            smallestelement.pop();
+        }
+    }
+    return smallestelement.top();
+    
+    }
 };
 
 //{ Driver Code Starts.
@@ -43,7 +52,7 @@ int main() {
         k = crr[0];
         int n = arr.size();
         Solution ob;
-        cout << ob.kthSmallest(arr, k) << endl;
+        cout << ob.kthSmallest(arr, k) << endl << "~\n";
     }
     return 0;
 }
