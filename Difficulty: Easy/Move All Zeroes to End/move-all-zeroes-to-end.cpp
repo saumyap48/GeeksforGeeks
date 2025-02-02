@@ -8,10 +8,20 @@ using namespace std;
 class Solution {
   public:
     void pushZerosToEnd(vector<int>& arr) {
-        // code here
-         for(int i=0,j=0 ;i<arr.size();i++)
-           if(arr[i] != 0)
-             swap(arr[i],arr[j++]);
+        int n=arr.size();
+        int countarr=0;
+       for(int i=0; i<n; i++){
+           if(arr[i]!=0){
+           arr[countarr]=arr[i];
+           countarr++;
+           }
+           
+       }
+       while(countarr<n){
+           arr[countarr]=0;
+           countarr++;
+       }
+       
     }
 };
 
@@ -36,6 +46,7 @@ int main() {
             cout << arr[i] << " ";
         }
         cout << "\n";
+        cout << "~" << endl;
     }
     return 0;
 }
