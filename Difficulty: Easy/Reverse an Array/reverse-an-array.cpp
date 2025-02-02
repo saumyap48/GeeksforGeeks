@@ -4,22 +4,22 @@ using namespace std;
 
 
 // } Driver Code Ends
-
 class Solution {
-public:
-    void reArray(vector<int>&arr, int start, int end) {
-    if (start >= end)
-        return;
-    swap(arr[start], arr[end]);
-
-    reArray(arr, start + 1, end - 1);
-}
-
-    void reverseArray(vector<int>& arr) {
-         reArray(arr, 0, arr.size()- 1);
+  public:
+    void reverseArray(vector<int> &arr) {
+        int n=arr.size();
+        stack<int>s;
+        for(int i=0; i<n; i++){
+            s.push(arr[i]);
         }
+        int i=0;
+        while(s.size()>0){
+            arr[i]=s.top();
+            s.pop();
+            i++;
+        }
+    }
 };
-
 
 //{ Driver Code Starts.
 int main() {
