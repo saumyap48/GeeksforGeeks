@@ -11,19 +11,17 @@ using namespace std;
 class Solution {
   public:
     int majorityElement(vector<int>& arr) {
-        
-        int ans=-1;
-        unordered_map<int, int> mp;
-        if(arr.size()==1){
-            return arr[0];
-        }
-        for (int i=0; i<arr.size(); i++){
-            mp[arr[i]]++;
-            if(mp[arr[i]]>arr.size()/2){
-                ans= arr[i];
-            }
-        }
-       return ans;
+        int n=arr.size();
+     unordered_map<int,int>freq;
+     int maxfreq=0,maxElement=-1;
+     for(int i=0; i<n; i++){
+         freq[arr[i]]++;
+      if(freq[arr[i]]>n/2){
+         maxfreq=freq[arr[i]];
+         maxElement=arr[i];
+     }
+     }
+       return maxElement;
     }
 };
 
