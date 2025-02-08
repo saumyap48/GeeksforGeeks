@@ -7,19 +7,14 @@ using namespace std;
 // User function template for C++
 class Solution {
   public:
-  int missingNumber(vector<int>& arr) {
-        
-        int n = arr.size()+1;
-        // code here
-        int sum=0;
-        
-        for(int i=0;i<arr.size();i++){
-            sum+=arr[i];
+    int missingNumber(vector<int>& arr) {
+        long n=arr.size()+1;
+        long long answer=0;
+        long long sum=n*(n+1)/2;
+        for(int num: arr){
+            answer+=num;
         }
-        
-        int ans = n*(n+1)/2;
-        
-        return ans-sum;
+        return (int)(sum-answer);
     }
 };
 
