@@ -26,26 +26,20 @@ class Array {
 class Solution {
   public:
     bool findPair(vector<int> &arr, int x) {
-    sort(arr.begin(),arr.end());
-    int i=0,j=1;
-    int n=arr.size();
-    while(j<n){
-       int diff=arr[j]-arr[i];
-       
-       if(diff==x && i!=j){
-           return true;
-       }
-       else if(diff<x){
-           j++;
-       }
-       else{
-           i++;
-       }
-       if(i==j){
-           j++;
-       }
-    }
-    return false;
+        int n=arr.size();
+        int start=0,end=1;
+        sort(arr.begin(),arr.end());
+        while(end<n){
+            if(arr[end]-arr[start]==x)
+            return true;
+            else if(arr[end]-arr[start]<x)
+            end++;
+            else
+            start++;
+            if(start==end)
+            end++;
+        }
+        return 0;
     }
 };
 
