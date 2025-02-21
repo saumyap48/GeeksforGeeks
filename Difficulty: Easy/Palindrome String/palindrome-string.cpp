@@ -7,20 +7,20 @@ using namespace std;
 // User function template for C++
 
 class Solution {
-public:
-
-    bool isPalindrome(string& s, int start, int end) {
-        if (start >= end)
-            return true;
-        if (s[start] != s[end])
-            return false;
-        return isPalindrome(s, start + 1, end - 1);
-    }
+  public:
+    // Function to check if a string is a palindrome.
     bool isPalindrome(string& s) {
-        return isPalindrome(s, 0, s.size() - 1);
+        int start=0, end=s.size()-1;
+        while(start<end){
+            if(s[start]!=s[end]){
+            return false;
+        }
+        start++,end--;
+        }
+        return true;
+        
     }
 };
-
 
 //{ Driver Code Starts.
 
