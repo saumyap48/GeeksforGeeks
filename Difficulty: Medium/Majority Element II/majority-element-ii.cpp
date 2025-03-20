@@ -6,42 +6,26 @@ using namespace std;
 // } Driver Code Ends
 
 class Solution {
-public:
-    vector<int> findMajority(vector<int>& arr) {
-        int n = arr.size();
-        int count = 1; 
-        vector<int> temp;
-        
-        sort(arr.begin(), arr.end()); 
-        
-        for (int i = 0; i < n; i++) {
-            if (i < n - 1 && arr[i] == arr[i + 1]) {
-                count++;
-            } 
-            if (i == n - 1 || arr[i] != arr[i + 1]) {
-                if (count > n / 3) {
-                    temp.push_back(arr[i]); 
-                }
-                count = 1;
+  public:
+    // Function to find the majority elements in the array
+    vector<int> findMajority(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>answer;
+        unordered_map<int,int>freq;
+        int mini=int(n/3)+1;
+        for(int i=0; i<n; i++){
+            freq[nums[i]]++;
+            if(freq[nums[i]]==mini){
+                answer.push_back(nums[i]);
+            }
+            if(answer.size()==2){
+                break;
             }
         }
-        
-        return temp;
+        sort(answer.begin(),answer.end());
+        return answer;
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //{ Driver Code Starts.
