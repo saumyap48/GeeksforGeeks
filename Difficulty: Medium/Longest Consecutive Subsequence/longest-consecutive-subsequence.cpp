@@ -8,35 +8,30 @@ using namespace std;
 
 class Solution {
   public:
-  
-   bool linearsearch(vector<int>&nums,int x){
-       int n=nums.size();
-       for(int i=0; i<n; i++){
-           if(nums[i]==x)
-           return true;
-       }
-       return false;
-   }
 
     // Function to return length of longest subsequence of consecutive integers.
-    int longestConsecutive(vector<int>& arr) {
-        int n=arr.size();
-        if(arr.size()==0){
-            return 0;
-        }
-        int longestlength=1;
+    int longestConsecutive(vector<int>& nums) {
+        int n=nums.size();
+        if(n==0) return 0;
+        sort(nums.begin(),nums.end());
+        int lastsmaller=INT_MIN;
+        int count=0;
+        int longest=1;
         for(int i=0; i<n; i++){
-            int x=arr[i];
-            int count=1;
-            while(linearsearch(arr,x+1)==true){
-                x+=1;
-                count+=1;
+            if(nums[i]-1==lastsmaller){
+                count++;
+                lastsmaller=nums[i];
             }
-            longestlength=max(longestlength,count);
+            else if(nums[i]!=lastsmaller){
+                count=1;
+                lastsmaller=nums[i];
+            }
+          longest=max(longest,count);
         }
-        return longestlength;
+        return longest;
     }
 };
+       
 
 
 //{ Driver Code Starts.
