@@ -9,18 +9,28 @@ class Solution {
   public:
     int search(vector<int>& nums, int target) {
         // Code Here
-         int n = nums.size();
-
-        // Loop through the array to find the target element
-        for (int i = 0; i < n; i++) {
-            // Check if the current element is the target
-            if (nums[i] == target)
-                // Return the index if the target is found
-                return i;
+     int n=nums.size();
+     int low=0,high=n-1;
+       while(low<=high){
+        int mid=low+(high-low)/2;
+        if(nums[mid]==target) return mid;
+        if(nums[low]<=nums[mid]){
+            if(nums[low]<=target && target<= nums[mid]){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+            }
+            else{
+                if(nums[mid]<=target && target<=nums[high]){
+                    low=mid+1;
+                }else{
+                    high=mid-1;
+                }
+            }
         }
-
-        // Return -1 if the target is not found
-        return -1;
+     return -1;
     }
 };
 
