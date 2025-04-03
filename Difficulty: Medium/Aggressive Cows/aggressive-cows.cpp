@@ -10,33 +10,35 @@ using namespace std;
 
 class Solution {
   public:
-
-    int aggressiveCows(vector<int> &stalls, int k) {
-
-    int n=stalls.size();
-    int start=1,end,mid,answer;
-    sort(stalls.begin(),stalls.end());
-    end=stalls[n-1]-stalls[0];
-    while(start<=end){
-        mid=start+(end-start)/2;
-        int count=1,position=stalls[0];
-        for(int i=0; i<n; i++){
-            if(position+mid<=stalls[i]){
-                count++;
-                position=stalls[i];
+       bool CanWePlace(vector<int>&nums,int distance,int cows){
+        int n=nums.size();
+        int countCows=1;
+        int last=nums[0];
+        for(int i=1; i<n; i++){
+            if(nums[i]-last>=distance){
+                countCows++;
+                last=nums[i]; 
             }
+            if(countCows>=cows) return true;
         }
-        if(count<k){
-        end=mid-1;
-        }
-        else{
-            answer=mid;
-            start=mid+1;
-        }
+        return false;
     }
-    return answer;
+    int aggressiveCows(vector<int> &nums, int cows) {
+           int n=nums.size();
+        sort(nums.begin(),nums.end());
+        int low=1,high=nums[n-1]-nums[0];
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(CanWePlace(nums,mid,cows)==true){
+            low=mid+1;
+            }
+            else
+            high=mid-1;
+        }
+        return  high;
     }
 };
+   
 
 //{ Driver Code Starts.
 
