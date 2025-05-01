@@ -24,6 +24,7 @@ void loopHere(Node* head, Node* tail, int position) {
 
 
 // } Driver Code Ends
+
 // User function template for C++
 
 /*
@@ -40,19 +41,22 @@ struct Node
 */
 class Solution {
   public:
-   
-   bool detectLoop(Node* head) {
-        Node* curr=head;
-        unordered_map<Node*,bool>visited;
-        while(curr){
-            if(visited[curr]==1)
-            return 1;
-         visited[curr]=1;
-            curr=curr->next;
+    // Function to check if the linked list has a loop.
+    bool detectLoop(Node* head) {
+        // your code here
+        Node* temp=head;
+        unordered_map<Node*,int>nodeMap;
+        while(temp!=nullptr){
+            if(nodeMap.find(temp)!=nodeMap.end()){
+                return true;
+            }
+            nodeMap[temp]=1;
+            temp=temp->next;
         }
-        return 0;
+        return false;
     }
 };
+
 
 
 //{ Driver Code Starts.
