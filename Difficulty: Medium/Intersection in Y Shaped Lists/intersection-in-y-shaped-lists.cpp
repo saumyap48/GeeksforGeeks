@@ -1,13 +1,12 @@
 //{ Driver Code Starts
-#include <iostream>
-
 #include <bits/stdc++.h>
 using namespace std;
 
-/* Link list Node */
-struct Node {
+/* Linked list Node */
+class Node {
+  public:
     int data;
-    struct Node* next;
+    Node* next;
 
     Node(int x) {
         data = x;
@@ -47,57 +46,45 @@ Node* inputList(int size, vector<int> v) {
 
 
 // } Driver Code Ends
-/* Linked List Node
-struct Node {
-  int data;
-  struct Node *next;
-  Node(int x) {
-    data = x;
-    next = NULL;
-  }
-}; */
+
+// Linked list Node
+/*
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
 
 class Solution {
   public:
-    // Function to find intersection point in Y shaped Linked Lists.
-    int intersectPoint(Node* head1, Node* head2) {
-        // Your Code Here
-        Node  *curr1=head1,  *curr2=head2;
-        int count1=0,  count2=0;
-        while(curr1){
-            count1++;
-            curr1=curr1->next;
-        }
-        while(curr2){
-            count2++;
-            curr2=curr2->next;
-        }
-        curr1=head1,curr2=head2;
-        while(count1>count2){
-            curr1=curr1->next;
-            count1--;
-        }
-        while(count2>count1){
-            curr2=curr2->next;
-            count2--;
-        }
-      while(curr1!=curr2){
-          curr1=curr1->next;
-          curr2=curr2->next;
-      }
-      if(!curr1)
-          return -1;
-      
-      return curr1->data;
+    Node* intersectPoint(Node* headA, Node* headB) {
+         unordered_set<Node*>node_set;
+         while(headA!=NULL){
+            node_set.insert(headA);
+            headA=headA->next;
+         }
+         while(headB!=NULL){
+            if(node_set.find(headB)!=node_set.end()){
+                return headB;
+            }
+            headB=headB->next;
+         }
+         return NULL;
     }
 };
+
 
 
 //{ Driver Code Starts.
 
 /* Driver program to test above function*/
 int main() {
-    srand(time(0));
     int T, n1, n2, n3;
 
     cin >> T;
@@ -128,8 +115,10 @@ int main() {
             temp = temp->next;
         if (temp != NULL)
             temp->next = common;
+
         Solution ob;
-        cout << ob.intersectPoint(head1, head2) << endl;
+        Node* intersectNode = ob.intersectPoint(head1, head2);
+        cout << intersectNode->data << endl;
         cout << "~" << endl;
     }
     return 0;
