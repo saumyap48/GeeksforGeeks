@@ -24,6 +24,7 @@ struct Node {
 
 
 // } Driver Code Ends
+
 /*
 struct Node {
   int data;
@@ -39,38 +40,23 @@ class Solution {
   public:
     // Function to check whether the list is palindrome.
     bool isPalindrome(Node *head) {
-        // Your code here   
-        if(head->next==NULL)
-            return 1;
-        int count=0;
-        Node* temp=head;
-        while(temp){
-            count++;
-            temp=temp->next;
+        // Your code here
+        vector<int>elements;
+        Node* current=head;
+        while(current!=nullptr){
+            elements.push_back(current->data);
+            current=current->next;
         }
-        count/=2;
-        Node *curr=head, *prev=NULL;
-        while(count){
-            prev=curr;
-            curr=curr->next;
-            count--;
-        }
-        prev->next=NULL;
-        Node *front=NULL;
-        while(curr){
-            front=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=front;
-        }
-            Node *head1=head, *head2=prev;
-            while(head1){
-                if(head1->data!=head2->data)
-               return 0;
-               head1=head1->next;
-               head2=head2->next;
+        int start=0;
+        int end=elements.size()-1;
+        while(start<end){
+            if(elements[start]!=elements[end]){
+                return false;
             }
-                return 1;
+            start++;
+            end--;
+        }
+        return true;
     }
 };
 
@@ -125,6 +111,7 @@ int main() {
             head = head->next;
             delete temp;
         }
+        cout << "~\n";
     }
     return 0;
 }
