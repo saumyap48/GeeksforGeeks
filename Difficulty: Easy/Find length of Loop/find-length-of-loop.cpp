@@ -12,14 +12,6 @@ struct Node {
     }
 };
 
-void printList(Node *node) {
-    while (node != NULL) {
-        cout << node->data << " ";
-        node = node->next;
-    }
-    cout << "\n";
-}
-
 void loopHere(Node *head, Node *tail, int position) {
     if (position == 0)
         return;
@@ -32,8 +24,8 @@ void loopHere(Node *head, Node *tail, int position) {
 
 
 // } Driver Code Ends
-/*
 
+/*
 struct Node {
     int data;
     struct Node *next;
@@ -48,24 +40,23 @@ class Solution {
   public:
     // Function to find the length of a loop in the linked list.
     int countNodesinLoop(Node *head) {
-     Node *slow=head, *fast=head;
-     while(fast && fast->next){
-       slow=slow->next;
-       fast=fast->next->next;
-       if(slow==fast)
-       break;
-     }
-     if(fast==NULL || fast->next==NULL)
-         return 0;
-         int count=1;
-         slow=fast->next;
-         while(slow!=fast){
-             count++;
-             slow=slow->next;
-     }
-     return count;
+        // Code here
+        unordered_map<Node*,int>visitedNode;
+        Node* temp=head;
+        int timer=0;
+        while(temp!=NULL){
+            if(visitedNode.find(temp)!=visitedNode.end()){
+            int Length_Of_Loop =timer-visitedNode[temp];
+            return Length_Of_Loop;
+        }
+        visitedNode[temp]=timer;
+        temp=temp->next;
+        timer++;
+        }
+        return 0;
     }
 };
+
 
 //{ Driver Code Starts.
 
@@ -95,6 +86,7 @@ int main() {
 
         Solution ob;
         cout << ob.countNodesinLoop(head) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
