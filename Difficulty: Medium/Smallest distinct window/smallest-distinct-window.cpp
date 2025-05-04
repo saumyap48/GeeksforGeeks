@@ -4,50 +4,39 @@ using namespace std;
 
 
 // } Driver Code Ends
-class Solution{
-    public:
-    int findSubString(string str)
-    {
-        vector<int>count(256,0);
-        int first=0,second=0,length=str.size();
-        int diff=0;
-        while(first<str.size())
-        {
-            if(count[str[first]]==0)
-            diff++;
-            count[str[first]]++;
-            first++;
-        };
-        for(int i=0; i<256; i++)
-            count[i]=0;
-            
-            first=0;
-            while(second<str.size())
-            {
-            while(diff && second<str.size())
-            {
-             if(count[str[second]]==0)
-             diff--;
-             count[str[second]]++;
-             second++;
-              }
-                length=min(length,second-first);
-                while(diff!=1)
-                {
-                    length=min(length,second-first);
-                    count[str[first]]--;
-                    
-                    if(count[str[first]]==0)
-                    diff++;
-                    first++;
-                }
-            }
-          return length;
+
+class Solution {
+  public:
+    int findSubString(string& str) {
+        unordered_set<char>UniqueChars;
+        for(int i=0; i<str.length(); i++){
+            UniqueChars.insert(str[i]);
+        }
+        int distinctCount=UniqueChars.size();
+        if(str.length()<=distinctCount){
+            return str.length();
+        }
+        int freq[256]={0};
+        int left=0, minLength=INT_MAX, found=0;
+        for(int right=0; right<str.length(); right++){
+            char curr=str[right];
+            if(freq[curr]==0) found++;
+            freq[curr]++;
+        while(found==distinctCount){
+            minLength=min(minLength,right-left+1);
+            char leftchar=str[left];
+            freq[leftchar]--;
+            if(freq[leftchar]==0)found--;
+            left++;
+        }
+        }
+        return minLength;
     }
 };
 
+
 //{ Driver Code Starts.
-// Driver code
+//      Driver code
 int main() {
     int t;
     cin >> t;
@@ -57,9 +46,10 @@ int main() {
         cin >> str;
         Solution ob;
         cout << ob.findSubString(str) << endl;
-    
-cout << "~" << "\n";
-}
+
+        cout << "~"
+             << "\n";
+    }
     return 0;
 }
 // } Driver Code Ends
